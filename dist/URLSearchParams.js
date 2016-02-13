@@ -13,6 +13,13 @@ var URLSearchParams = function () {
         _classCallCheck(this, URLSearchParams);
 
         this.queryStirng = queryString;
+        this.queryDict = {};
+        /*this.queryDict = {
+            a: [1,2],
+            b: ["word"],
+            c: ["str"],
+            d: ["c1", "c2"]
+        };*/
 
         if (this.queryStirng) {
             this.parse();
@@ -21,35 +28,69 @@ var URLSearchParams = function () {
 
     _createClass(URLSearchParams, [{
         key: "append",
-        value: function append() {}
+        value: function append(key, value) {
+            if (key !== undefined && value !== undefined) {
+                this.queryDict[key].push(value);
+            }
+        }
     }, {
         key: "delete",
-        value: function _delete() {}
+        value: function _delete(key) {
+            if (this.queryDict[key]) {
+                delete this.queryDict[key];
+            }
+        }
     }, {
         key: "entries",
         value: function entries() {}
     }, {
         key: "get",
-        value: function get() {}
+        value: function get(key) {
+            if (this.queryDict[key] && this.queryDict[key].length >= 1) {
+                return this.queryDict[key][0];
+            } else {
+                return null;
+            }
+        }
     }, {
         key: "getAll",
-        value: function getAll() {}
+        value: function getAll(key) {
+            if (this.queryDict[key] && this.queryDict[key].length >= 1) {
+                return this.queryDict[key];
+            } else {
+                return null;
+            }
+        }
     }, {
         key: "set",
-        value: function set() {}
+        value: function set(key, value) {
+            if (key !== undefined && value !== undefined) {
+                this.queryDict[key] = [value];
+            }
+        }
+    }, {
+        key: "has",
+        value: function has(key) {
+            return !!(this.queryDict[key] && this.queryDict[key].length >= 1);
+        }
     }, {
         key: "values",
         value: function values() {}
     }, {
         key: "toString",
         value: function toString() {
+            var _this = this;
+
             var list = [],
                 keys = [];
 
             keys = Object.keys(this.queryDict);
 
-            keys.forEach(function (key, i) {
-                list.push(key + "=" + this.queryDict[key]);
+            keys.forEach(function (key) {
+
+                _this.queryDict[key].forEach(function (value, i) {
+                    list.push(key + "=" + value);
+                });
             });
 
             return list.join("&");
@@ -57,13 +98,16 @@ var URLSearchParams = function () {
     }, {
         key: "parse",
         value: function parse() {
-            var _this = this;
+            var _this2 = this;
 
             this.queryDict = {};
             this.queryStirng.split("&").forEach(function (ele, i) {
                 var tmpList = ele.split("=");
                 if (tmpList.length === 2) {
-                    _this.queryDict[tmpList[0]] = tmpList[1];
+                    if (!_this2.queryDict[tmpList[0]]) {
+                        _this2.queryDict[tmpList[0]] = [];
+                    }
+                    _this2.queryDict[tmpList[0]].push(tmpList[1]);
                 }
             });
         }
@@ -71,3 +115,6 @@ var URLSearchParams = function () {
 
     return URLSearchParams;
 }();
+
+exports.URLSearchParams = URLSearchParams;
+exports.value = 1;

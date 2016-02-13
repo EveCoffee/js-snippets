@@ -5,34 +5,59 @@
 class URLSearchParams{
     constructor(queryString){
         this.queryStirng = queryString;
+        this.queryDict = {};
+        /*this.queryDict = {
+            a: [1,2],
+            b: ["word"],
+            c: ["str"],
+            d: ["c1", "c2"]
+        };*/
 
         if(this.queryStirng){
             this.parse();
         }
     }
 
-    append(){
-
+    append(key, value){
+        if(key !== undefined && value !== undefined){
+            this.queryDict[key].push(value);
+        }
     }
 
-    delete(){
-
+    delete(key){
+        if(this.queryDict[key]){
+            delete this.queryDict[key];
+        }
     }
 
     entries(){
 
     }
 
-    get(){
-
+    get(key){
+        if(this.queryDict[key] && this.queryDict[key].length >= 1){
+            return this.queryDict[key][0];
+        }else{
+            return null;
+        }
     }
 
-    getAll(){
-
+    getAll(key){
+        if(this.queryDict[key] && this.queryDict[key].length >= 1){
+            return this.queryDict[key];
+        }else{
+            return null;
+        }
     }
 
-    set(){
+    set(key, value){
+        if(key !== undefined && value !== undefined){
+            this.queryDict[key] = [value];
+        }
+    }
 
+    has(key){
+        return !!(this.queryDict[key] && this.queryDict[key].length >= 1);
     }
 
     values(){
@@ -44,8 +69,12 @@ class URLSearchParams{
 
         keys = Object.keys(this.queryDict);
 
-        keys.forEach(function (key, i) {
-            list.push(`${key}=${this.queryDict[key]}`);
+        keys.forEach( key => {
+
+            this.queryDict[key].forEach( (value, i) => {
+                list.push(`${key}=${value}`);
+            });
+
         });
 
         return list.join("&");
@@ -56,7 +85,11 @@ class URLSearchParams{
         this.queryStirng.split("&").forEach((ele, i) => {
             var tmpList = ele.split("=");
             if(tmpList.length === 2){
-                this.queryDict[tmpList[0]] = tmpList[1];
+                if(!this.queryDict[tmpList[0]]){
+                    this.queryDict[tmpList[0]] = [];
+                }
+                this.queryDict[tmpList[0]].push(tmpList[1]);
+
             }
         });
     }
@@ -65,3 +98,4 @@ class URLSearchParams{
 
 
 exports.URLSearchParams = URLSearchParams;
+exports.value = 1;
