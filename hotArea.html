@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no" />
+    <title>图片热区设置</title>
+    <link rel="stylesheet" href="dist/HotArea/hot-area.css">
+    <style>
+
+    </style>
+</head>
+<body>
+
+
+
+<div class="hot-area hide">
+
+    <button class="show-btn">show</button>
+    <div class="show-area">
+
+        <div class="box-info">
+            <h3 class="class">.box1</h3>
+            <p>
+                width: <span class="width" contenteditable="true">200</span>px;
+            </p>
+            <p>
+                height: <span class="height" contenteditable="true">200</span>px;
+            </p>
+            <p>
+                top: <span class="top" contenteditable="true">5</span>px;
+            </p>
+            <p>
+                left: <span class="left" contenteditable="true">6</span>px;
+            </p>
+        </div>
+
+
+        <button class="close-btn">x</button>
+    </div>
+
+    <div class="render-area">
+        <div class="var-area"></div>
+    </div>
+
+</div>
+
+
+<script src="dist/HotArea/HotArea.js"></script>
+<script>
+
+    var hotArea = new HotArea();
+
+</script>
+
+</body>
+</html>
