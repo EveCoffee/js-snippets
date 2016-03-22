@@ -37,6 +37,13 @@ body.move {
 .hot-area .show-area .box-info {
   padding-top: 15px;
 }
+.hot-area .show-area .box-info p {
+  padding-left: 15px;
+}
+.hot-area-box {
+  resize: both;
+  overflow: hidden;
+}
 .hot-area-box.active {
   border: 1px solid rgba(232, 94, 94, 0.54);
   box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, 0.1);

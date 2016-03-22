@@ -250,7 +250,7 @@ HotArea.prototype = {
 
         this.hotAreaList.forEach(function (obj, index) {
             htmlTpl = `
-                <div class="hot-area-box" data-type="hot-area" data-index="${index}" style="position: absolute; top: ${obj.startY}px; left: ${obj.startX}px; width: ${obj.endX-obj.startX}px; height: ${obj.endY-obj.startY}px; background-color: #ccc;"></div>
+                <div class="hot-area-box" data-type="hot-area" data-index="${index}" draggable="true" style="position: absolute; top: ${obj.startY}px; left: ${obj.startX}px; width: ${obj.endX-obj.startX}px; height: ${obj.endY-obj.startY}px; background-color: #ccc;"></div>
             `;
             html += htmlTpl;
         });

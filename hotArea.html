@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no" />
     <title>图片热区设置</title>
     <link rel="stylesheet" href="dist/HotArea/hot-area.css">
+    <link rel="stylesheet" href="src/HotArea/highlight/styles/default.css">
     <style>
 
     </style>
@@ -19,7 +20,7 @@
     <div class="show-area">
 
         <div class="box-info">
-            <h3 class="class">.box1</h3>
+            <h3 class="class">.box1</h3>{
             <p>
                 width: <span class="width" contenteditable="true">200</span>px;
             </p>
@@ -32,6 +33,7 @@
             <p>
                 left: <span class="left" contenteditable="true">6</span>px;
             </p>
+            }
         </div>
 
 
@@ -44,7 +46,8 @@
 
 </div>
 
-
+<script src="src/HotArea/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <script src="dist/HotArea/HotArea.js"></script>
 <script>
 
