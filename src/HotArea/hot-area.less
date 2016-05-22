@@ -11,6 +11,19 @@ html,body{
   font-family: "Microsoft Yahei", serif;
 }
 
+body{
+  background: url("/src/HotArea/images/bg.JPG") no-repeat;
+  background-size: 100% 100%;
+}
+
+// 禁用文字选择
+.no-select{
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 /*记录鼠标运动轨迹的状态*/
 body.move{
   cursor: crosshair;
@@ -68,6 +81,78 @@ body.move{
 
       z-index: 10;
     }
+
+    .border-left{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background-color: red;
+      cursor: e-resize
+    }
+    .border-right{
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 3px;
+      height: 100%;
+      background-color: red;
+      cursor: w-resize
+    }
+    .border-top{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: red;
+      cursor: n-resize
+    }
+    .border-bottom{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: red;
+      cursor: s-resize
+    }
+
+
+    .border-top-left, .border-top-right, .border-bottom-left, .border-bottom-right{
+      position: absolute;
+      width: 10px;
+      height: 10px;
+
+      background-color: red;
+    }
+
+    .border-top-left{
+      top: 0;
+      left: 0;
+
+      cursor: se-resize;
+    }
+    .border-top-right{
+      top: 0;
+      right: 0;
+
+      cursor: ne-resize;
+    }
+    .border-bottom-left{
+      bottom: 0;
+      left: 0;
+
+      cursor: ne-resize;
+    }
+    .border-bottom-right{
+      bottom: 0;
+      right: 0;
+
+      cursor: se-resize;
+    }
+
   }
 
   .show-btn{

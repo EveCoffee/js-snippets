@@ -2,6 +2,24 @@
  * Created by 55hudong on 2016/3/22.
  */
 
+function Modal(selector) {
+    this.self = document.querySelector(selector);
+
+    console.log(this.self);
+}
+
+Modal.prototype = {
+    constructor: Modal,
+    show: function () {
+        this.self.classList.remove("hide");
+    },
+    hide: function () {
+        this.self.classList.add("hide");
+    }
+};
+
+var modal = new Modal(".hot-area");
+
 
 function HotArea() {
     var _this = this;
@@ -14,6 +32,7 @@ function HotArea() {
     this.renderArea = this.self.querySelector(".render-area");
     this.showArea = null;
 
+    // 绘制热区的坐标
     this.startX = 0;
     this.startY = 0;
     this.endX = 0;
@@ -75,8 +94,6 @@ function HotArea() {
 
     });
 
-    this.data.top = 3333412421;
-
     this.hotAreaList = [
         /*{
             startX: 0,
@@ -85,6 +102,21 @@ function HotArea() {
             endY: 100
         }*/
     ];
+
+    if(window.localStorage.getItem("hotAreaList") !== null){
+        this.hotAreaList = JSON.parse(window.localStorage.getItem("hotAreaList"));
+    }
+
+    // 推盒子的时候进行数据保存以及重绘
+    this.hotAreaList.push = function () {
+        Array.prototype.push.apply(this, arguments);
+        window.localStorage.setItem("hotAreaList", JSON.stringify(this));
+        _this.render();
+    };
+
+    console.log(this.hotAreaList);
+    // 初始化数据
+
 
     this.showBtn.onclick = function () {
         _this.self.classList.remove("hide");
@@ -95,11 +127,11 @@ function HotArea() {
         console.log(_this.showBtn);
     };
 
-    _this.self.classList.remove("hide");
-
     this.render();
 
     this.body.addEventListener("click", function (event) {
+
+        // 是否选中了一个热区
         if(event.target !== this && event.target.dataset.type === "hot-area"){
             var index = (event.target.dataset.index);
             var obj = _this.hotAreaList[index];
@@ -120,16 +152,24 @@ function HotArea() {
                     }else{
                         allNode[i].classList.remove("active");
                     }
-
                 }
             }
 
-
+            modal.show();
 
 
         }else{
+            modal.hide();
+        }
+
+    });
+
+    this.body.addEventListener("mousedown", function (event) {
+        if(event.target.className === "border-left"){
 
         }
+
+
     });
 
     this.mouseDownEvent = function (event) {
@@ -226,7 +266,6 @@ HotArea.prototype = {
             endX: this.endX,
             endY: this.endY
         });
-        this.render();
     },
 
     // 计算鼠标移动热区的位置
@@ -250,7 +289,17 @@ HotArea.prototype = {
 
         this.hotAreaList.forEach(function (obj, index) {
             htmlTpl = `
-                <div class="hot-area-box" data-type="hot-area" data-index="${index}" draggable="true" style="position: absolute; top: ${obj.startY}px; left: ${obj.startX}px; width: ${obj.endX-obj.startX}px; height: ${obj.endY-obj.startY}px; background-color: #ccc;"></div>
+                <div class="hot-area-box" data-type="hot-area" data-index="${index}" draggable="true" style="position: absolute; top: ${obj.startY}px; left: ${obj.startX}px; width: ${obj.endX-obj.startX}px; height: ${obj.endY-obj.startY}px; background-color: #ccc;">
+                    <span class="border-left" style=""></span>
+                    <span class="border-right" style=""></span>
+                    <span class="border-top" style=""></span>
+                    <span class="border-bottom" style=""></span>
+                    
+                    <span class="border-top-left"></span>
+                    <span class="border-top-right"></span>
+                    <span class="border-bottom-left"></span>
+                    <span class="border-bottom-right"></span>
+                </div>
             `;
             html += htmlTpl;
         });

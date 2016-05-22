@@ -19,7 +19,7 @@
     <button class="show-btn">show</button>
     <div class="show-area">
 
-        <div class="box-info">
+        <div class="box-info no-select">
             <h3 class="class">.box1</h3>{
             <p>
                 width: <span class="width" contenteditable="true">200</span>px;
@@ -51,7 +51,18 @@
 <script src="dist/HotArea/HotArea.js"></script>
 <script>
 
+    Object.defineProperty(window, "list", {
+        get: function () {
+            return [1,2,3];
+        },
+        set: function (value) {
+            console.log("不准动， 懂？");
+        }
+    });
+
+
     var hotArea = new HotArea();
+
 
 </script>
 
