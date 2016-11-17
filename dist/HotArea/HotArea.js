@@ -117,6 +117,7 @@ function HotArea() {
     console.log(this.hotAreaList);
     // 初始化数据
 
+
     this.showBtn.onclick = function () {
         _this.self.classList.remove("hide");
     };

@@ -5,6 +5,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
+ * URLSearchParams
  * Created by coffee on 2016/2/11.
  */
 
@@ -98,17 +99,11 @@ var URLSearchParams = function () {
     }, {
         key: "parse",
         value: function parse() {
-            var _this2 = this;
-
             this.queryDict = {};
-            this.queryStirng.split("&").forEach(function (ele, i) {
-                var tmpList = ele.split("=");
-                if (tmpList.length === 2) {
-                    if (!_this2.queryDict[tmpList[0]]) {
-                        _this2.queryDict[tmpList[0]] = [];
-                    }
-                    _this2.queryDict[tmpList[0]].push(tmpList[1]);
-                }
+
+            this.queryStirng.replace(/\??(\w+)=(\w+)/g, function (full, key, value) {
+                this.queryDict[key] = this.queryDict[key] | [];
+                this.queryDict.push(value);
             });
         }
     }]);

@@ -1,4 +1,5 @@
 /**
+ * URLSearchParams
  * Created by coffee on 2016/2/11.
  */
 
@@ -82,16 +83,12 @@ class URLSearchParams{
 
     parse(){
         this.queryDict = {};
-        this.queryStirng.split("&").forEach((ele, i) => {
-            var tmpList = ele.split("=");
-            if(tmpList.length === 2){
-                if(!this.queryDict[tmpList[0]]){
-                    this.queryDict[tmpList[0]] = [];
-                }
-                this.queryDict[tmpList[0]].push(tmpList[1]);
-
-            }
-        });
+        
+        this.queryStirng.replace(/\??(\w+)=(\w+)/g, function(full, key, value){
+            this.queryDict[key] = this.queryDict[key] | [];
+            this.queryDict.push(value);
+        })
+        
     }
 
 }

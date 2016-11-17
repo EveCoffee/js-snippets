@@ -10,7 +10,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var TimeFormat = function () {
     function TimeFormat() {
-        var date = arguments.length <= 0 || arguments[0] === undefined ? new Date() : arguments[0];
+        var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new Date();
 
         _classCallCheck(this, TimeFormat);
 
@@ -275,12 +275,6 @@ var TimeFormat = function () {
             }
 
         };
-        /**
-         * 毫秒 （PHP 5.2.2 新加）。需要注意的是 date() 函数总是返回 000000 因为它只接受 integer 参数， 而 DateTime::format() 才支持毫秒。
-         * 示例: 654321
-         */
-        /*"u": function (inputTime) {
-         }*/
         this.formatKey = Object.keys(this.formatMethod);
         this.formatReg = new RegExp("[" + this.formatKey.join("") + "]", "g");
 
@@ -292,7 +286,7 @@ var TimeFormat = function () {
         value: function get() {
             var _this = this;
 
-            var str = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
+            var str = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
 
             return str.replace(this.formatReg, function ($0) {
                 return _this.formatMethod[$0].call(_this, _this.date);
